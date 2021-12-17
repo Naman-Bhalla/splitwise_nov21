@@ -19,11 +19,11 @@ public class BaseModel {
     private long id;
 
     @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdatedAt;
 }

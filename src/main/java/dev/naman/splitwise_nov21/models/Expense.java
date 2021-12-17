@@ -27,6 +27,13 @@ public class Expense extends BaseModel {
     Map<User, Long> owedBy;
     // key, value
 
+    // createdBy:
+    // description
+    // amount
+    // currency
+    // paidBy:
+    // owedBy:
+
     // user: key, lonmg: value
 
 //    @ManyToOne
