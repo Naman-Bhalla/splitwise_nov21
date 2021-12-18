@@ -7,8 +7,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class CreateGroupRequestDto {
+public class CreateGroupRequestDto extends AuthenticatedRequestDto{
     private String name;
-    private Long admin;
     private Set<Long> member;
 }

@@ -16,7 +16,7 @@ public class GroupController {
 
         Group group = this.groupService.createGroup(
                 createGroupRequestDto.getName(),
-                createGroupRequestDto.getAdmin(),
+                createGroupRequestDto.getUserId(),
                 createGroupRequestDto.getMember());
 
         CreateGroupResponseDto response= new CreateGroupResponseDto();

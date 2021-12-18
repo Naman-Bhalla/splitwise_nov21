@@ -72,7 +72,7 @@ public class SplitwiseNov21Application implements CommandLineRunner {
 
         CreateGroupRequestDto groupRequestDto = new CreateGroupRequestDto();
         groupRequestDto.setName(groupName);
-        groupRequestDto.setAdmin(1L);
+        groupRequestDto.setUserId(1L);
         groupRequestDto.setMember(memberSet);
 
         groupController.create(groupRequestDto);

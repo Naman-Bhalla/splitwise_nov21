@@ -7,6 +7,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateGroupResponseDto {
+public class CreateGroupResponseDto extends  ResponseDto{
     private Group group;
 }
