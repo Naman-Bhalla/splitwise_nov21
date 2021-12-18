@@ -1,7 +1,6 @@
 package dev.naman.splitwise_nov21.controllers;
 
-import dev.naman.splitwise_nov21.dtos.CreateGroupRequestDto;
-import dev.naman.splitwise_nov21.dtos.CreateGroupResponseDto;
+import dev.naman.splitwise_nov21.dtos.*;
 import dev.naman.splitwise_nov21.models.Group;
 import dev.naman.splitwise_nov21.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,12 @@ public class GroupController {
         response.setGroup(group);
 
         return response;
+    }
+
+    public CreateGroupExpenseResponseDto createExpense(CreateGroupExpenseRequestDto groupExpenseRequestDto){
+
+        return this.groupService.createExpense(
+                groupExpenseRequestDto.getGroupId(),
+                groupExpenseRequestDto.getExpenseRequestDto());
     }
 }

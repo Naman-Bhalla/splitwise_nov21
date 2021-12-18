@@ -38,6 +38,11 @@ public class SplitwiseNov21Application implements CommandLineRunner {
 
         userController.registerUser(dto);
 
+        dto.setName("Sai");
+        userController.registerUser(dto);
+
+        dto.setName("Narotham");
+        userController.registerUser(dto);
 
         UpdateUserProfileRequestDto dto2 = new UpdateUserProfileRequestDto();
         dto2.setUserId(1L);
@@ -76,6 +81,14 @@ public class SplitwiseNov21Application implements CommandLineRunner {
         groupRequestDto.setMember(memberSet);
 
         groupController.create(groupRequestDto);
+
+        CreateGroupExpenseRequestDto groupExpenseRequestDto = new CreateGroupExpenseRequestDto();
+        groupExpenseRequestDto.setGroupId(1L);
+        requestDto.setDescription("Group Class Expense");
+        groupExpenseRequestDto.setExpenseRequestDto(requestDto);
+
+        groupController.createExpense(groupExpenseRequestDto);
+
     }
 }
 

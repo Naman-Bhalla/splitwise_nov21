@@ -19,6 +19,10 @@ public class Group extends BaseModel {
     @ManyToMany
     private List<User> members;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
+            name="group_expenses",
+            joinColumns = @JoinColumn(name = "group_id")
+    )
     private List<Expense> expenses;
 }

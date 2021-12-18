@@ -1,5 +1,11 @@
 package dev.naman.splitwise_nov21.services;
 
+import dev.naman.splitwise_nov21.controllers.ExpenseController;
+import dev.naman.splitwise_nov21.dtos.CreateExpenseRequestDto;
+import dev.naman.splitwise_nov21.dtos.CreateExpenseResponseDto;
+import dev.naman.splitwise_nov21.dtos.CreateGroupExpenseResponseDto;
+import dev.naman.splitwise_nov21.dtos.Status;
+import dev.naman.splitwise_nov21.models.Expense;
 import dev.naman.splitwise_nov21.models.Group;
 import dev.naman.splitwise_nov21.models.User;
 import dev.naman.splitwise_nov21.repositories.GroupRepository;
@@ -20,6 +26,8 @@ public class GroupService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ExpenseController expenseController;
     public Group createGroup(String name, Long adminId, Set<Long> members) {
 
         Optional<User> admin = this.userRepository.findById(adminId);
@@ -36,5 +44,32 @@ public class GroupService {
         group.setName(name);
         group.setMembers(groupMembers);
         return this.groupRepository.save(group);
+    }
+
+    public CreateGroupExpenseResponseDto createExpense(Long groupId, CreateExpenseRequestDto expenseRequestDto){
+
+        CreateGroupExpenseResponseDto groupExpenseResponseDto =  new CreateGroupExpenseResponseDto();
+
+        Optional<Group> group = this.groupRepository.findById(groupId);
+
+        if(group.isEmpty()){
+            groupExpenseResponseDto.setStatus(Status.ERROR);
+            return groupExpenseResponseDto;
+        }
+
+        CreateExpenseResponseDto expense = this.expenseController.create(expenseRequestDto);
+
+        List<Expense> expenseList = new ArrayList<>();
+//        expenseList.add(expense.getExpense());
+
+        Group updateGroup = group.get();
+        updateGroup.getExpenses().add(expense.getExpense());
+
+        Group updatedGroup = this.groupRepository.save(updateGroup);
+
+        groupExpenseResponseDto.setGroup(updatedGroup);
+        groupExpenseResponseDto.setExpense(expense.getExpense());
+
+        return groupExpenseResponseDto;
     }
 }
