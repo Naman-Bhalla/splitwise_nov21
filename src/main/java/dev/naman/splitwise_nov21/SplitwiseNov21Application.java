@@ -1,6 +1,7 @@
 package dev.naman.splitwise_nov21;
 
 import dev.naman.splitwise_nov21.controllers.ExpenseController;
+import dev.naman.splitwise_nov21.controllers.GroupController;
 import dev.naman.splitwise_nov21.controllers.UserController;
 import dev.naman.splitwise_nov21.dtos.*;
 import dev.naman.splitwise_nov21.models.Currency;
@@ -10,8 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -21,6 +21,9 @@ public class SplitwiseNov21Application implements CommandLineRunner {
 
     @Autowired
     private ExpenseController expenseController;
+
+    @Autowired
+    private GroupController groupController;
 
     public static void main(String[] args) {
         SpringApplication.run(SplitwiseNov21Application.class, args);
@@ -35,6 +38,11 @@ public class SplitwiseNov21Application implements CommandLineRunner {
 
         userController.registerUser(dto);
 
+        dto.setName("Sai");
+        userController.registerUser(dto);
+
+        dto.setName("Narotham");
+        userController.registerUser(dto);
 
         UpdateUserProfileRequestDto dto2 = new UpdateUserProfileRequestDto();
         dto2.setUserId(1L);
@@ -61,6 +69,25 @@ public class SplitwiseNov21Application implements CommandLineRunner {
 
         expenseController.create(requestDto);
 
+
+        String groupName = "Group name";
+        Set<Long> memberSet = new HashSet<>();
+        memberSet.add(2L);
+        memberSet.add(3L);
+
+        CreateGroupRequestDto groupRequestDto = new CreateGroupRequestDto();
+        groupRequestDto.setName(groupName);
+        groupRequestDto.setUserId(1L);
+        groupRequestDto.setMember(memberSet);
+
+        groupController.create(groupRequestDto);
+
+        CreateGroupExpenseRequestDto groupExpenseRequestDto = new CreateGroupExpenseRequestDto();
+        groupExpenseRequestDto.setGroupId(1L);
+        requestDto.setDescription("Group Class Expense");
+        groupExpenseRequestDto.setExpenseRequestDto(requestDto);
+
+        groupController.createExpense(groupExpenseRequestDto);
 
     }
 }

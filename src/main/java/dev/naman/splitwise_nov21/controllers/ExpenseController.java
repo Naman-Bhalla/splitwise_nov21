@@ -68,8 +68,10 @@ public class ExpenseController {
         expense.setOwedBy(owedUserAmounts);
         expense.setPaidBy(paidUserAmounts);
 
-        expenseService.createExpense(expense);
-        return null;
+        Expense createdExpense = expenseService.createExpense(expense);
+
+        responseDto.setExpense(createdExpense);
+        return  responseDto;
     }
 }
 
