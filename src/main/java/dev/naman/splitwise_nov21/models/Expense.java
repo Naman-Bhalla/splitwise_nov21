@@ -25,6 +25,7 @@ public class Expense extends BaseModel {
 
     @ElementCollection
     Map<User, Long> owedBy;
+
     // key, value
 
     // createdBy:
@@ -44,3 +45,10 @@ public class Expense extends BaseModel {
 // ~2-3 hrs
 // finish 1 requirement by 1 to 1
 // 100.85 / 3
+
+
+// Create API for settleExpenses() for a Group
+// settleExpenses() in a group
+// Return the list of transactions, if when made will lead to a minimal number of transavtions
+// Brute Force
+// Greedy Algorithms
